@@ -5,6 +5,7 @@ format: html
 editor: visual
 bibliography: references.bib
 lang: es-CL
+codigo: https://colab.research.google.com/drive/10z47xs0CDsVaZGp1bj_5KCToyIIoO3v9#scrollTo=BMYvesvmigep
 ---
 
 ```{r configuraciones}
@@ -52,15 +53,11 @@ Haciendo énfasis en el retorno anual, es lo que mide la rentabilidad promedio d
 
 Históricamente, el SPY ha ofrecido un retorno anual promedio cercano al 10%, sin embargo, el gráfico de retorno anualizado está basado en una media móvil de 252 días (un año de mercado) y refleja las fluctuaciones del mercado a corto plazo, con valores que pueden ir desde retornos negativos en periodos de crisis hasta valores superiores al 20% en periodos de auge económico.
 
-Imágen 1: Retorno Anual SPY 2018-2024
-
-Fuente:Elaboración propia
+![](Imagenes/Imagen1.png)
 
 Por otra parte, tenemos la volatilidad que es sumamente importante ya que mide cómo varía el precio del SPY en un cierto periodo. La volatilidad es importante para inversores que buscan entender el riesgo asociado que tiene este ETF. El SPY al componerse de las 500 empresas más grandes de Estados Unidos, tiene variaciones que dependen de factores tanto de eventos de cada industria o de eventos macroeconómicos. La volatilidad se puede interpretar como medida de sentimiento de un mercado, es decir, que, si existe un aumento de volatilidad, esto suele reflejar una mayor incertidumbre económica. Como se puede ver en la imagen 2, se puede apreciar que en el periodo de la pandemia existe una alta volatilidad y va de acuerdo con la incertidumbre que existía en ese momento.
 
-Imágen 2: Volatilidad SPY 2018-2024
-
-Fuente:Elaboración propia
+![](Imagenes/Imagen2.png)
 
 El ratio de precio ganancias compara el precio del SPY con las ganancias agregadas de las empresas que componen al índice. Es muy importante la métrica para evaluar si el mercado está valorado de acuerdo con el S&P 500. En distintos periodos, con en el de crecimiento económico el ratio del SPY tiende a ser más alto, lo cual refleja las expectativas de crecimiento futuro.
 
@@ -68,9 +65,7 @@ El P/E ratio compara el precio del SPY con las ganancias agregadas de las empres
 
 Actualmente,hasta 2021 el ratio P/E del S&P 500 estaba en torno a 29.43, según la imagen 3. Esto indica que el mercado podría estar valorando positivamente el futuro crecimiento de las empresas, lo que coincide con un periodo de recuperación económica tras eventos como la pandemia. Sin embargo, si el crecimiento de las ganancias no cumple con las expectativas, el mercado podría estar sobrevalorado, lo que eventualmente conduciría a una corrección.La fluctuación del P/E ratio a lo largo del tiempo, como se ve en el gráfico, ilustra la relación directa entre el estado de la economía y las expectativas de los inversores.
 
-Imágen 3: Opción Call SPY
-
-Fuente:Robert Shiller and his book Irrational Exuberance for historic S&P 500 PE Ratio.
+![](Imagenes/Imagen3.png)
 
 Y por último es importante considerar el precio del activo subyacente ya que es fundamental para poder valorizar la opción call. En este caso al utilizar la opción SPY Sep. 2024 560.000 Call como ejemplo a analizar, se puede ver que ofrece al titular de comprar acciones del SPY a un precio, strike, de \$560 antes del 16 de septiembre. La prima de esta opción se encuentra en \$2.75 USD lo que es el precio a pagar para tener la oportunidad de adquirir una acción del SPY en un futuro.
 
@@ -98,17 +93,11 @@ Lo primero es definir los parámetros necesarios para poder realizar el análisi
 
 Como se puede observar en las imágenes 4,5 y 6 se pueden obtener los distintos datos para realizar el modelo binomial. Es importante recalcar que se utilizó un Bono del tesoro de Estados Unidos a 5 años, los datos de este bono se encuentran en la imágen 3.
 
-Imágen 4: Opción Call SPY
+![](Imagenes/Imagen4.png)
 
-Fuente:Yahoo Finance
+![](Imagenes/Imagen5.png)
 
-Imágen 5: Activo Subyacente (SPY)
-
-Fuente:Yahoo Finance
-
-Imágen 6: Bonos del tesoro Estados Unidos
-
-Fuente: Bloomberg
+![](Imagenes/Imagen6.png)
 
 Al obtener los precios de cada activo en sus estados respectivos se obtiene el valor de u y d que deben ser reemplazados en el código.
 
@@ -118,9 +107,7 @@ Al obtener los precios de cada activo en sus estados respectivos se obtiene el v
 
 Al analizar la matriz W, en la imagen 7, se puede observar que existen tres filas. En la primera fila se encuentran los valores iniciales del bono, el activo subyacente y la opción, respectivamente. El bono tiene un valor de \$100.88 USD, el activo subyacente tiene un valor inicial de \$562.01 USD, y el valor de la opción es \$2.75 USD.
 
-Imágen 7: Código Binomial
-
-Fuente:Material entregado en clases
+![](Imagenes/Imagen7.png)
 
 En la segunda fila, correspondiente al estado upper (u), se observa que el bono ha aumentado su valor a \$104.34 USD al igual que en la tercera fila. Esto indica que la tasa de interés, en este caso de 3% aproximadamente, genera un crecimiento más moderado en el valor del bono en comparación con otros escenarios en el cual el crecimiento del bono sería mucho mayor. Lo que ocurre con el bono va de acuerdo al modelo binomial y la tasa de rendimiento. Si bien el bono es un activo seguro, su crecimiento limitado refleja un bajo rendimiento lo cual influye menos en la valoración total de la opción.
 
@@ -132,9 +119,7 @@ En cuanto a las probabilidades ajustadas por riesgo, se observa que, aunque la o
 
 Al realizar el modelo Black-Scholes se puede observar en la imagen 8, que el precio de la opción call es de \$3.18 USD. El resultado refleja el valor teórico de la opción al igual que en el modelo binomial. Este modelo de Black-Scholes tiene un precio inferior al del modelo binomial en estado “upper”, pero esta diferencia se reduce al considerar promedio ponderado de los diferentes escenarios en el modelo binomial. La diferencia entre los dos modelos puede atribuirse al origen del modelo binomial ya que divide el tiempo en intervalos y el modelo Black-Scholes asume un proceso continuo.
 
-Imágen 8: Código Black Scholes
-
-Fuente:Elaboración Propia
+![](Imagenes/Imagen8.png)
 
 5.  Conclusiones
 
@@ -151,9 +136,7 @@ Finalmente, al contrastar el modelo binomial con el modelo de Black-Scholes se p
 
 6.  Visualización 
 
-Imágen 9: Detección de IA
-
-Fuente: [Undetectable.ai/es](http://undetectable.ai/es)
+![](Imagenes/Imagen9.png)
 
 7.  Bibliografía
 
