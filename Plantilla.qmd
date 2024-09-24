@@ -1,6 +1,6 @@
 ---
 title: "Proyecto Gestión Financiera"
-author: "Julio Tejero"
+author: "Ignacio Zamorano"
 format: html
 editor: visual
 bibliography: references.bib
