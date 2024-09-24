@@ -23,213 +23,153 @@ library(tidyquant)
 
 Fecha de entrega límite: Miércoles 25 de Septiembre 23:59.
 
-### Definición
+### 
 
-El activo elegido fue Enel Chile S.A. La compañía es una extensión de Enel, empresa italiana. Se dedica a generación, distribución y transformación de energía a lo largo de todo el país.
+1.  Sector
 
-Enel Chile se formó a partir de una reestructuración que comenzó en el año 2015, en ese entonces la empresa se llamaba Enersis Américas. En esta reestructuración, se aprobó la fusión de las compañías Enersis Chile, Endesa Chile y Chilectra en una estrategia denominada "La Fusión". En este mismo proceso se procedió al cambio de nombre a la hoy conocida Enel Chile S.A.
+En el presente documento se analizará el ETF, SPY, que replica el índice S&P 500, que comprende las 500 acciones con mayor capitalización de Estados Unidos. El S&P 500 se considera unos de los principales indicadores del rendimiento del mercado de acciones de Estados Unidos, y es por esto por lo que actúa como un medidor de salud de la economía global (Nickolas, 2024).
 
-Enel Chile es la mayor suministradora de energía del país, debido a esto en relevante exponer los datos nacionales de uso de electricidad. En el paper "Consumption-based carbon emissions, renewable energy consumption, financial development and economic growth in Chile" de @kirikkaleli2021 se expone un análisis descriptivo de los consumos nacionales de electricidad, el cual se presenta a continuación:
+El SPY, que fue lanzado al mercado en 1993, por State Street Global Advisors es el ETF más antiguo y de los más transados a nivel mundial. Es considerado el índice original que sigue al S&P 500. La finalidad es entregar a los inversionistas una diversificación al mercado debido a la amplia gama de sectores que cubre, ya sea tecnología, salud, finanzas, entre otros.\
+La relevancia del S&P 500, como se mencionó anteriormente, es que ha sido utilizado como un indicador de la economía estadounidense por la cantidad de sectores y empresas que lo componen. A través del ETF, los inversionistas pueden seguir el rendimiento de las empresas y del mercado sin tener que comprar cada acción por separado para replicar en índice.
 
-[![Tabla 2 en](Data/Screenshot%202023-09-28%20at%2015.51.18.png){fig-align="center"}](https://doi.org/10.1002/bse.2945)
+Estudios recientes como el de Anna Agapova, el cual analiza el crecimiento de los ETFs, destaca cómo estos modos de inversión ha facilitado una mayor diversificación y liquidez en el mercado. Los ETFs permiten a los inversionistas acceder a una cartera con mayor diversificación de acciones a bajos costos en comparación con fondos tradicionales (Agapova, 2011).
 
-En donde:
+2.  Motivación
 
--   CCO2: Emisiones de carbonos basadas en el consumo de energía medida en millones de toneladas de CO2.
+La motivación de estudiar el SPY, es que es uno de los activos más populares del mundo el cual tiene un valor muy importante para los distintos inversionistas a lo largo del mundo. Desde una perspectiva personal, como un estudiante interesado en los mercados financieros, es fundamental el índice S&P 500 para entender cómo se comportan las empresas estadounidenses. Por otra parte, como se dijo antes, es un índice que todos los mercados del mundo están pendientes en cómo fluctúa a través del tiempo con el fin de tomar decisiones financieras.
 
--   GDP: Crecimiento de la economía medido en el PIB per cápita.
+El S&P 500 es conocido por ser uno de los índices con mayor rentabilidad a largo plazo. Históricamente ha ofrecido un retorno promedio de aproximadamente 10% anual, lo cual lo hace una opción atractiva para los distintos inversores del mundo. El SPY ofrece a los inversores una forma de inversión con un bajo costo, lo que hace que sea una herramienta accesible para distintos tipos de inversores. Esta es una de las principales diferencias con otros activos que son más complejos y costosos de utilizar.
 
--   ELE: Consumo eléctrico medido en Kw/h.
+Adicional a lo anterior, el SPY, que replica el S&P 500, da la oportunidad de exponerse a múltiples sectores de la economía, ya sea tecnología, finanzas, salud, entre otros. Esto hace que el SPY sea sumamente importante para entender cómo funciona el mercado global y entrega una visión de cómo las 500 empresas más grandes en Estados Unidos reaccionan a distintos eventos macroeconómicos. 
 
--   REN: COnsumo de energía renovables medido en Tw/h.
+Al hacer un análisis de este mercado, entregará la posibilidad de utilizar los modelos aprendidos en clases y aplicarlo en un ejemplo práctico en la vida real.
 
--   FD: Crecimiento financiero, medida amplia para el desarrollo financiero teniendo en cuenta su eficiencia, accesibilidad y profundidad.
+3.  Contexto
 
-```{r ETL}
-#| echo: false
-# Alternativamente Use FANG data set
-# data("FANG") 
-end <- as_date("2022-12-31")
-# Get AAPL and AMZN Stock Prices
-# AAPL <- tq_get("AAPL", get = "stock.prices", from = "2015-09-01", to = end)
-# AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = end)
-ENELCHILE <- tq_get("ENELCHILE.SN", get = "stock.prices", from = "2017-01-01", to = end)
-ENELAM <- tq_get("ENELAM.SN", get = "stock.prices", from = "2017-01-01", to = end)
-AESANDES <- tq_get("AESANDES.SN", get = "stock.prices", from = "2017-01-01", to = end)
-ECL <- tq_get("ECL.SN", get = "stock.prices", from = "2017-01-01", to = end)
-CL <- rbind(ENELCHILE,ENELAM,AESANDES,ECL)
-```
+En el análisis que se realiza del SPY, se consideran 3 variables económicas importantes que tienen una relación directa en el rendimiento y comportamiento del mercado. La primera es el retorno anual, la volatilidad de este y el ratio precio ganancias. Las variables entregan un análisis integral del funcionamiento del ETF, acompañado del riesgo y la rentabilidad.
 
-Por otro lado, también es de suma importancia tener en consideración los precios históricos del activo ENELCHILE, el cual actualmente tiene un valor promedio para el intervalo de años 2017-presente igual a `r round(mean(ENELCHILE$close),digits=0)`. A continuación se presentan dos gráficos que muestran estos datos históricos:
+Haciendo énfasis en el retorno anual, es lo que mide la rentabilidad promedio del SPY en un periodo determinado, en este caso anualmente. Esta medición es importante para evaluar la utilidad de una inversión a largo plazo. Al comprender cómo varía el retorno anual en distintos periodos entrega una visión clara en la economía sobre el impacto de distintos eventos, ya sea recesiones, expansiones, entre otros. Al analizar el retorno anualizado del SPY desde 2017 hasta 2024, se observa que este varía significativamente a lo largo del tiempo debido a eventos económicos globales. Por ejemplo, en 2020, el retorno cayó considerablemente debido al impacto de la pandemia, pero luego se recuperó en el 2021 con el estímulo económico y la recuperación de los mercados.
 
-```{r ENELCHILEline}
-#| echo: false
-ENELCHILE %>%
-    ggplot(aes(x = date, y = close)) +
-    geom_line() +
-    labs(title = "ENELCHILE Line Chart", y = "Closing Price", x = "") + 
-    theme_tq() +
-  geom_hline(yintercept=mean(ENELCHILE$close), linetype="dashed", color = "red")
-```
+Históricamente, el SPY ha ofrecido un retorno anual promedio cercano al 10%, sin embargo, el gráfico de retorno anualizado está basado en una media móvil de 252 días (un año de mercado) y refleja las fluctuaciones del mercado a corto plazo, con valores que pueden ir desde retornos negativos en periodos de crisis hasta valores superiores al 20% en periodos de auge económico.
 
-```{r ENELCHILEcandle}
-#| warning: false
-ENELCHILE %>%
-    ggplot(aes(x = date, y = close)) +
-    geom_candlestick(aes(open = open, high = high, low = low, close = close)) +
-    labs(title = "ENELCHILE Candlestick Chart", y = "Closing Price", x = "") +
-    theme_tq()
-```
+Imágen 1: Retorno Anual SPY 2018-2024
 
-### Motivación
+Fuente:Elaboración propia
 
-Se escogió este activo en particular debido al compromiso con el medio ambiente y a indicadores ASG (Ambiental, Social y Gobernanza), alguno de sus objetivos son:
+Por otra parte, tenemos la volatilidad que es sumamente importante ya que mide cómo varía el precio del SPY en un cierto periodo. La volatilidad es importante para inversores que buscan entender el riesgo asociado que tiene este ETF. El SPY al componerse de las 500 empresas más grandes de Estados Unidos, tiene variaciones que dependen de factores tanto de eventos de cada industria o de eventos macroeconómicos. La volatilidad se puede interpretar como medida de sentimiento de un mercado, es decir, que, si existe un aumento de volatilidad, esto suele reflejar una mayor incertidumbre económica. Como se puede ver en la imagen 2, se puede apreciar que en el periodo de la pandemia existe una alta volatilidad y va de acuerdo con la incertidumbre que existía en ese momento.
 
-Alcanzar un 80% de energía renovable en su matriz de generación para 2024, reducir las emisiones de gases de efecto invernadero en un 40% para 2025 y aumentar la eficiencia energética en un 20% para 2030.
+Imágen 2: Volatilidad SPY 2018-2024
 
-Como menciona el Diario Financiero (DF) Enel Chile sostiene una estrategia de sostenibilidad para llegar a ser una empresa carbono neutral al año 2040. Para lograr este objetivo, Enel destinará US\$1.700 millones a temas ASG, los que principalmente se gastarán en la construcción de nuevas plantas de energías renovables.
+Fuente:Elaboración propia
 
-Asimismo, varios documentos de la WOS (Web of Science) sustentan la iniciativa medioambiental de Enel Chile, principalmente con tarifas variables que logren cambiar los hábitos de uso de energía, homeostaticidad energética, entre otros.
+El ratio de precio ganancias compara el precio del SPY con las ganancias agregadas de las empresas que componen al índice. Es muy importante la métrica para evaluar si el mercado está valorado de acuerdo con el S&P 500. En distintos periodos, con en el de crecimiento económico el ratio del SPY tiende a ser más alto, lo cual refleja las expectativas de crecimiento futuro.
 
-Todos estos puntos fomentan el interés especifico sobre este activo por sobre los demás activos energéticos incluidos en el IPSA.
+El P/E ratio compara el precio del SPY con las ganancias agregadas de las empresas que lo componen. Es una métrica fundamental para evaluar si el mercado está valorando adecuadamente al S&P 500 o si está sobrevalorado o infravalorado. En periodos de crecimiento económico, el P/E ratio del SPY tiende a ser más alto, reflejando las expectativas de crecimiento futuro de las empresas más grandes de Estados Unidos. Como se dice en el libro Investments de Kane A., & Marcus, A.J (2020). En periodo de crecimiento económico, los inversores son más optimistas en las perspectivas de las empresas, lo cual hace que se refleje en precios de acciones más altos debido a que los inversores están dispuestos a pagar más hoy para mayores beneficios en el futuro. 
 
-### Contexto
+Actualmente,hasta 2021 el ratio P/E del S&P 500 estaba en torno a 29.43, según la imagen 3. Esto indica que el mercado podría estar valorando positivamente el futuro crecimiento de las empresas, lo que coincide con un periodo de recuperación económica tras eventos como la pandemia. Sin embargo, si el crecimiento de las ganancias no cumple con las expectativas, el mercado podría estar sobrevalorado, lo que eventualmente conduciría a una corrección.La fluctuación del P/E ratio a lo largo del tiempo, como se ve en el gráfico, ilustra la relación directa entre el estado de la economía y las expectativas de los inversores.
 
-El IPSA tiene 4 componentes de la industria de energía, Enel Chile S.A, Enel Latinoamerica S.A, Engie Energia Chile S.A y AES Gener SA. Los primeros 2 corresponden a la empresa italiana Enel. A continuación se presentan los precios históricos de cada una de estas acciones:
+Imágen 3: Opción Call SPY
 
-```{r context}
-#| warning: false
-#| echo: false
-start <- end - weeks(6)
+Fuente:Robert Shiller and his book Irrational Exuberance for historic S&P 500 PE Ratio.
 
-CL %>%
-    filter(date >= start - days(2 * 15)) %>%
-    ggplot(aes(x = date, y = close, group = symbol)) +
-    geom_line() +
-    labs(title = "Activos Energía IPSA", 
-         subtitle = "Comparativo de activos del sector",
-         y = "Precio al cierrew", x = "") + 
-    coord_x_date(xlim = c(start, end)) +
-    facet_wrap(~ symbol, ncol = 2, scale = "free_y") +
-    theme_tq()
-```
+Y por último es importante considerar el precio del activo subyacente ya que es fundamental para poder valorizar la opción call. En este caso al utilizar la opción SPY Sep. 2024 560.000 Call como ejemplo a analizar, se puede ver que ofrece al titular de comprar acciones del SPY a un precio, strike, de \$560 antes del 16 de septiembre. La prima de esta opción se encuentra en \$2.75 USD lo que es el precio a pagar para tener la oportunidad de adquirir una acción del SPY en un futuro.
 
-Si bien los montos de los precios dependen de otros factores, tales como la cantidad de acciones que componen la compañía, si se observan tendencias entre estas. La más clara es que ambas empresas de Enel siguen un mismo patrón de precios, lo que hace sentido ya que pertenecen al mismo grupo. Lo que también se aprecia, es que cuando el precio de Enel aumenta, tanto de Engie Energia Chile S.A como el de AES Gener SA disminuye. Esto se puede deber a que la variación en la participación que tiene en la industria cada uno de estas influye inversamente en la otra (a mayor participación de Enel Chile, menor será la de el resto de los suministradores nacionales).
+4.  Derivados
 
-También es interesante ver las rentabilidades que ha tenido el activo elegido:
+En este apartado se realizará el análisis sobre la opción de compra sobre el ETF llamado SPY.
 
-![](Data/Screenshot%202023-09-28%20at%2017.57.54.png){fig-align="center" width="144"}
+Lo primero es definir los parámetros necesarios para poder realizar el análisis de Black and Scholes. Los parámetros son los siguientes.
 
-A partir de esto se puede ver que Enel Chile ha tenido un crecimiento en la mayoría de los años, aunque se puede apreciar una baja de casi un 50% en el año 2021 debido a la pandemia de Covid-19. Cabe destacar que según analistas de Yahoo Finance, Enel Chile tendrá un crecimiento estimado cercano al 65,80%.
+-   Precio del Ejercicio (K) : \$560
 
-### Modelo Binomial
+-   Precio de la opción (Q3): \$2.75
 
-El Modelo Binomial de Valoración de Opciones (BM, por sus siglas en inglés) también conocido como Cox-Ross-Rubinstein introducido en @cox1979, es un modelo que estima el valor de una opción en t=0 teniendo pagos futuros en diferentes estados (usualmente "Up" y "Down"). Este Modelo Binomial asume que no hay posibilidad de arbitraje en el mercado, determinando el precio que sigue un activo en un random walk, en donde en cada paso (tiempo) existe una probabilidad de que el precio suba o baje (Ahmad, 2018).
+-   Precio del Bono (B) : 100.88
 
-![Random Walk en BM de un paso (Ahmad, 2018)](Data/Screenshot%202023-10-19%20at%2010.33.38.png){fig-align="center"}
+-   Rendimiento del bono (r) : 3.43%
 
-Para calcular la valoración de la opción con el Modelo Binomial, es necesario definir $S_0$, que corresponde al precio actual del activo. Además, se deben determinar los valores de $u$ y $d$, que representan los factores por los cuales se multiplica $S_0$ en cada estado para obtener el precio del activo en cada caso en el siguiente período (t = 1):
+-   Day´s Range: \$1.69
 
-$$
-S_1 = \begin{cases}    S_0\cdot u \text{ en el estado ``Up"} \\    
-S_0\cdot d \text{ en el estado ``Down"}\end{cases}
-$$
+-   Precio del activo Subyacente (S0): \$562.01
 
-También se debe calcular la probabilidad $P$ de que ocurra el caso "Up", la probabilidad de que ocurra el otro caso ("Down") simplemete quedaría en $(1-P)$. Para el calculo de la porobabilidad se usa la siguiente ecuación:
+-   Precio del activo Estado u :\$ 563.7
 
-$$
-P = \frac{e^r-d}{u-d}
-$$
+-   Precio del activo Estado d :\$560.32
 
-Donde $r$ es la tasa libre de riesgo.
+Como se puede observar en las imágenes 4,5 y 6 se pueden obtener los distintos datos para realizar el modelo binomial. Es importante recalcar que se utilizó un Bono del tesoro de Estados Unidos a 5 años, los datos de este bono se encuentran en la imágen 3.
 
-Por otro lado se deben calcular $C_u$ y $C_d$ los cuales se obtienen como los precios de una opción europea:
+Imágen 4: Opción Call SPY
 
-$$
-C_u = max(0, S_0\cdot u-k)\\
-C_d = max(0, S_0\cdot d-k)
-$$
+Fuente:Yahoo Finance
 
-Finalmente el precio de la opción se calcula de la siguiente manera:
+Imágen 5: Activo Subyacente (SPY)
 
-$$
-V = \frac{C_u\cdot P + C_d\cdot (1-P)}{1+r}
-$$
+Fuente:Yahoo Finance
 
-```{r}
-binomial_model <- function(cu, p, cd, rf) {
-  return((cu*p + cd*(1-p))/(1+rf))
-} 
+Imágen 6: Bonos del tesoro Estados Unidos
 
-S <- tail(ENELCHILE$close,1)  # Precio actual del activo subyacente
-K <- 38  # Precio de ejercicio de la opción
-T <- 1  # Tiempo hasta la expiración (en años)
-r <- 0.0642 # Tasa de interés libre de riesgo
-u <- 1.1  # Factor de crecimiento en un paso hacia arriba
-d <- 0.9  # Factor de crecimiento en un paso hacia abajo
+Fuente: Bloomberg
 
-Su <- S*u
-Sd <- S*d
-p <- (1+r-d)/((1+r)*(u-d))
+Al obtener los precios de cada activo en sus estados respectivos se obtiene el valor de u y d que deben ser reemplazados en el código.
 
-cu <- max(Su - K, 0)
-cd <- max(Sd - K, 0)
+-   u : \$1.003
 
+-   d : \$0.9969
 
-print(paste("El precio de la opción con el Modelo Binomial es ", binomial_model(cu, p, cd, r)))
+Al analizar la matriz W, en la imagen 7, se puede observar que existen tres filas. En la primera fila se encuentran los valores iniciales del bono, el activo subyacente y la opción, respectivamente. El bono tiene un valor de \$100.88 USD, el activo subyacente tiene un valor inicial de \$562.01 USD, y el valor de la opción es \$2.75 USD.
 
-```
+Imágen 7: Código Binomial
 
-### Modelo Black and Scholes (BS)
+Fuente:Material entregado en clases
 
-```{r}
-black_scholes <- function(S, K, t, r, sigma) {
-    d1 <- (log(S/K) + (r + 0.5 * sigma^2) * t) / (sigma * sqrt(t))
-    d2 <- d1 - sigma * sqrt(t)
-    N_d1 <- pnorm(d1)
-    N_d2 <- pnorm(d2)
-    precio_call <- S * N_d1 - K * exp(-r * t) * N_d2
-    return(precio_call)
-  }
-  
-rendimientos <- diff(log(ENELCHILE$close))
-sigma<-sd(rendimientos[2:length(rendimientos)])
-volatilidad<-var(rendimientos[2:length(rendimientos)])
+En la segunda fila, correspondiente al estado upper (u), se observa que el bono ha aumentado su valor a \$104.34 USD al igual que en la tercera fila. Esto indica que la tasa de interés, en este caso de 3% aproximadamente, genera un crecimiento más moderado en el valor del bono en comparación con otros escenarios en el cual el crecimiento del bono sería mucho mayor. Lo que ocurre con el bono va de acuerdo al modelo binomial y la tasa de rendimiento. Si bien el bono es un activo seguro, su crecimiento limitado refleja un bajo rendimiento lo cual influye menos en la valoración total de la opción.
 
+El activo subyacente ha subido a \$563.69 USD, y el valor intrínseco es de \$3.69 USD, ya que el precio del activo es mayor que el precio de ejercicio (\$560 USD), lo que representa la ganancia inmediata al ejercer la opción de compra. El valor temporal es de \$ -0.94 lo que quiere decir que la opción probablemente está subvalorada en este caso, o puede ser una señal de ineficiencia de mercado. La opción se ejerce con una ganancia considerable manteniéndola en " in-the-money" .
 
-S<- tail(ENELCHILE$close,1) # Precio actual del activo subyacente
-K<- 38 # Precio de ejercicio de la opción
-R<- 0.0642 # Tasa de interés libre de riesgo
-t <- 1 # Tiempo hasta la expiración (en años)
+En la tercera fila, que representa el estado lower (d), el valor intrínseco de la opción es de \$0.27 USD, ya que el precio del activo subyacente ha bajado a \$560.26 USD, lo que sigue siendo ligeramente mayor que el precio de ejercicio.El valor temporal es de \$2.48 USD lo que quiere decir que los inversionistas están dispuestos a pagar una prima adicional debido a las probabilidades de que el precio del activo aumente antes de la fecha del vencimiento. En este caso, la opción se ejercerá con una pequeña ganancia, ya que sigue siendo un precio mayor al del ejercicio, manteniéndola in-the-money, aunque con un valor intrínseco reducido.
 
-print(paste("El precio de la opción con el Modelo Black and Scholes es ", black_scholes(S, K, t, R, sigma)))
+En cuanto a las probabilidades ajustadas por riesgo, se observa que, aunque la opción tiene un valor intrínseco significativo en este momento, su valor futuro dependerá del movimiento del activo subyacente. Si el precio del activo subyacente sube por encima de \$563.69 USD, la opción ganará valor. Si el precio baja, pero sigue por encima de \$560 USD, la opción seguirá estando "in-the-money”, aunque el valor intrínseco será menor. Si el precio baja por debajo de \$560 USD, la opción entrará en "out-of-the-money”, y perderá su valor intrínseco, lo que reducirá significativamente su valor total.
 
+Al realizar el modelo Black-Scholes se puede observar en la imagen 8, que el precio de la opción call es de \$3.18 USD. El resultado refleja el valor teórico de la opción al igual que en el modelo binomial. Este modelo de Black-Scholes tiene un precio inferior al del modelo binomial en estado “upper”, pero esta diferencia se reduce al considerar promedio ponderado de los diferentes escenarios en el modelo binomial. La diferencia entre los dos modelos puede atribuirse al origen del modelo binomial ya que divide el tiempo en intervalos y el modelo Black-Scholes asume un proceso continuo.
 
-```
+Imágen 8: Código Black Scholes
 
-### Comparación de modelos
+Fuente:Elaboración Propia
 
-Ambos modelos son comúnmente utilizados en las finanzas. Por lo tanto, se puede afirmar que cuentan con respaldo y fundamentos sólidos. Según el artículo de (Ahmad, 2018), los resultados del precio de la opción calculados con ambos modelos muestran una correlación muy cercana a 1, lo que significa que si el precio de la opción aumenta con un modelo, también lo hace con el otro. Sin embargo, esto no implica que ambos modelos proporcionen el mismo precio, como se puede observar en el ejercicio realizado anteriormente.
+5.  Conclusiones
 
-Estos modelos difieren en algunas cosas, tales como:
+El análisis del ETF SPY, que replica el índice S&P 500, ha permitido examinar en detalle como el activo refleja el comportamiento de las 500 empresas con mayor capitalización bursátil en Estados Unidos y actúa como un importante indicador de la economía global. A lo largo del documento, se enfatizó en cómo el SPY, a través de la diversificación que lo compone, brinda a los inversionistas la oportunidad de acceder al rendimiento del mercado en una manera eficiente y a un bajo costo. Esta diversificación convierte al SPY en una herramienta importante para inversiones de gran tamaño como para inversionistas de pequeño tamaño, dando la posibilidad de mitigar riesgos y beneficiarse de la rentabilidad histórica promedio que ronda el 10% anual.
 
--   Precio del activo subyacente: En modelo Black and Scholes sigue una distribución lognormal mientras que el Binomial multiplica el valos $S_0$ con dos opciones ($u$ y $d$)
+El estudio fue realizado con la opción call “SPY Sep. 2024 560.000 Call” analizando su valor intrínseco y temporal. El análisis demostró que la opción se encuentra “in-the-money” al analizarlo en el estado normal, con un valor intrínseco de \$2.01 USD (Valor activo - K) . La prima de la opción de \$2.75 USD , también tiene un componente de valor temporal de \$0.71 USD, lo que refleja la expectativa del mercado de que el precio del activo subyacente podría seguir subiendo antes de la fecha de vencimiento.
 
--   Debido a lo anterior, el modelo de Black and Scholes es continuo y el Binomial discreto.
+\
+El modelo binomial permitió simular los posibles escenarios del activo subyacente y su impacto en el valor de la opción bajo distintos escenarios. En el estado upper se tiene que el precio del activo subyacente es de \$563.69, lo que da un valor intrínseco de 3.69 y un valor temporal negativo, lo que significa que existe una anomalía en el mercado debido a que la opción está subvalorada. En el estado lower se puede apreciar que el activo subyacente tiene un valor de \$560.26 USD con un valor intrínseco de \$0.27 USD, lo cual es bajo pero sigue siendo una ganancia inmediata al ejercer el derecho de compra. Cabe destacar que ambas situaciones se tiene que están “in-the-money" debido a que la opción de compra será ejercida en ambas situaciones.
 
--   El modelo BS sirve solo para opciones europeas, mientras que el Binomial también sirve para opciones americanas.
+El modelo binomial permitió simular los posibles escenarios del activo subyacente y su impacto en el valor de la opción bajo distintos escenarios. Se observó que en el estado “upper”, la opción genera un margen de ganancia mientras que en el estado “lower”, el valor de la opción se reduce a \$0.27 USD debido a que el valor de la prima sigue siendo mayor que el precio del activo subyacente por lo que aún existe un márgen de ganancias. Es por esto que queda demostrado la sensibilidad del valor de la opción ante los distintos cambios en el mercado.
 
-También tienen algunas similitudes:
+Finalmente, al contrastar el modelo binomial con el modelo de Black-Scholes se pueden observar pequeñas diferencias. Ambos modelos entregan valores de la opción relativamente cercanos para la opción analizada, lo que indica que Black-Scholes puede ser una alternativa válida para la valorización de esta opción de ETF. Sin embargo, el enfoque binomial ofrece una mayor flexibilidad de considerar distintos escenarios en tiempo discreto y ajustar valores en base a probabilidades.
 
--   Ambos utilizan el precio actual del activo subyacente.
+6.  Visualización 
 
--   Ambos usan la tasa libre de riesgo.
+Imágen 9: Detección de IA
 
--   En este caso los dos se usaron para un periodo de tiempo.
+Fuente: [Undetectable.ai/es](http://undetectable.ai/es)
 
--   Ambos consideran la volatilidad del activo.
+7.  Bibliografía
 
-En resumen, el modelo de Black-Scholes constituye una buena herramienta analítica para valorar opciones europeas y supone movimientos continuos en las cotizaciones del mercado. En cambio, el modelo Binomial ofrece mayor flexibilidad al emplear una estructura de árbol que facilita la valoración tanto de opciones europeas como americanas. Elegir uno u otro modelo dependerá del tipo específico de opción que se esté analizando y las inferencias que se quieran hacer en relación a cómo evolucionarán los precios en el mercado financiero.
+Agapova, A., 2011. Conventional mutual index funds versus exchange-traded funds. Journal of Financial Markets, pp. 323-343.
+
+Ben-David, I., Franzoni, F. & Moussawi, R., 2018. Do ETFs Increase Volatility?. The Journal of Finance, 73(6), pp. 2471-2535.
+
+Bloomberg, 2024. US Government Bonds. Bloomberg Markets. Disponible en:<https://www.bloomberg.com/markets/rates-bonds/government-bonds/us> \[Último acceso: 14 Septiembre 2024\].
+
+Bodie, Z., Kane, A., & Marcus, A. J. (2014). Investments (10th ed.). McGraw-Hill Education.
+
+Nickolas, S., 2024. Investopedia. \[Online\]  Disponible en: <https://www.investopedia.com/articles/investing/122215/spy-spdr-sp-500-trust-etf.asp> \[Último acceso: 14 Septiembre 2024\].
+
+Yahoo Finance, 2024. SPDR S&P 500 ETF Trust (SPY) Stock Price, News, Quote & History. Yahoo Finance. Disponible en:<https://finance.yahoo.com/quote/SPY/> \[Último acceso: 14 Septiembre 2024\].
+
+Schiller, R. (S.F) S&P 500 PE Ratio. Disponible en: <https://www.multpl.com/s-p-500-pe-ratio>  \[Último acceso: 20 Septiembre 2024\].
 
 # Hito 2 (en revisión):
 
